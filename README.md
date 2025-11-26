@@ -82,6 +82,23 @@ You'll need to generate these 7 images and place them in the `assets/images/` di
 - AI opponents use pathfinding and strategic behavior
 - Difficulty increases with each round
 
+## Troubleshooting
+
+### XInput Error on WSL2
+
+If you see errors like `ERROR:xinput.cc(2297)` when running on WSL2, this is a harmless warning about X11 input handling. The game will work perfectly fine.
+
+**Solutions:**
+- Use `npm start` - automatically filters these warnings
+- Use `npm run start:verbose` - to see all output including warnings
+- These errors don't affect gameplay or functionality
+
+### Game Won't Start
+
+1. Make sure you've built the project: `npm run build`
+2. Check that Node.js and npm are installed
+3. Try reinstalling dependencies: `rm -rf node_modules && npm install`
+
 ## License
 
 MIT
