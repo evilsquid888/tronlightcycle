@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tron Light Cycle</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      font-family: 'Courier New', monospace;
+      color: #00ffff;
+      overflow: hidden;
+    }
+
+    #game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    #canvas {
+      border: 2px solid #00ffff;
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    #ui {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 18px;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    #menu {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 40px;
+      border: 2px solid #00ffff;
+      box-shadow: 0 0 30px #00ffff;
+      display: none;
+    }
+
+    #menu h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px #00ffff;
+    }
+
+    #menu p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    #menu button {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 20px;
+      background: transparent;
+      color: #00ffff;
+      border: 2px solid #00ffff;
+      cursor: pointer;
+      font-family: 'Courier New', monospace;
+      transition: all 0.3s;
+    }
+
+    #menu button:hover {
+      background: #00ffff;
+      color: #000;
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    #round-info {
+      margin: 10px 0;
+      font-size: 20px;
+    }
+
+    .controls {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #00aaaa;
+    }
+
+    .winner-text {
+      color: #00ff00;
+      font-size: 24px;
+      margin: 20px 0;
+    }
+
+    .loser-text {
+      color: #ff0000;
+      font-size: 24px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="canvas"></canvas>
+
+    <div id="ui">
+      <div id="round-info">Round: <span id="round">1</span> / <span id="total-rounds">5</span></div>
+      <div>Alive: <span id="alive-count">0</span></div>
+    </div>
+
+    <div id="menu">
+      <h1>TRON LIGHT CYCLE</h1>
+      <div id="menu-content">
+        <p>Compete against AI opponents</p>
+        <p>Avoid walls and light trails</p>
+        <div class="controls">
+          <p>Controls: Arrow Keys or WASD</p>
+        </div>
+      </div>
+      <button id="start-btn">START GAME</button>
+    </div>
+  </div>
+
+  <script src="dist/renderer.js"></script>
+</body>
+</html>
