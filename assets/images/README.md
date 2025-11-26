@@ -1,29 +1,28 @@
 # Image Assets
 
-Place your generated images here with the following filenames:
+You'll need to generate these 7 images and place them in this directory:
 
-- `player-cycle.png` - Blue player light cycle (128x128px)
-- `ai-cycle-red.png` - Red AI cycle (128x128px)
-- `ai-cycle-yellow.png` - Yellow AI cycle (128x128px)
-- `ai-cycle-green.png` - Green AI cycle (128x128px)
-- `ai-cycle-purple.png` - Purple AI cycle (128x128px)
-- `arena-bg.png` - Grid arena background (1920x1080px)
-- `explosion.png` - Explosion effect sprite (512x512px)
+## 1. player-cycle.png
+"Futuristic Tron light cycle motorcycle in electric blue color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
 
-## Generation Prompts
+## 2. ai-cycle-red.png
+"Futuristic Tron light cycle motorcycle in bright red/orange color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
 
-### Player/AI Cycles
-"Futuristic Tron light cycle motorcycle in [COLOR] color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
+## 3. ai-cycle-yellow.png
+"Futuristic Tron light cycle motorcycle in electric yellow color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
 
-Colors:
-- Player: electric blue / cyan
-- AI 1: bright red/orange
-- AI 2: electric yellow
-- AI 3: neon green
-- AI 4: purple/magenta
+## 4. ai-cycle-green.png
+"Futuristic Tron light cycle motorcycle in neon green color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
 
-### Arena Background
+## 5. ai-cycle-purple.png
+"Futuristic Tron light cycle motorcycle in purple/magenta color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
+
+## 6. arena-bg.png
 "Dark Tron grid arena background, black floor with glowing blue grid lines, futuristic cyberpunk aesthetic, digital world, top-down view, seamless texture, 1920x1080"
 
-### Explosion Effect
+## 7. explosion.png
 "Neon explosion effect sprite sheet, electric particles, glowing fragments, Tron style, cyberpunk aesthetic, transparent background, 512x512 pixels"
+
+---
+
+**Note:** The game is fully playable without these images - it uses colored geometric shapes as placeholders. The images are optional visual enhancements!
