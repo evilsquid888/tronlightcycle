@@ -1,0 +1,57 @@
+{
+  "name": "Tron Light Cycle Game",
+  "description": "Electron-based Tron light cycle game with TypeScript",
+  "permissions": {
+    "bash": {
+      "allow": [
+        "git init:*",
+        "git add:*",
+        "git commit:*",
+        "git status:*",
+        "git log:*",
+        "npm install",
+        "npm run build:*",
+        "npm test:*",
+        "npm start:*",
+        "node:*",
+        "tree:*",
+        "./node_modules/.bin/electron:*",
+        "timeout *:*",
+        "ls:*",
+        "pwd:*",
+        "cat:*",
+        "mkdir:*",
+        "mv:*",
+        "rm:*",
+        "chmod:*",
+        "echo:*",
+        "grep:*",
+        "head:*",
+        "tail:*",
+        "awk:*",
+        "xset:*"
+      ]
+    },
+    "read": {
+      "allow": [
+        "/mnt/c/dev/tronlight/**"
+      ]
+    },
+    "write": {
+      "allow": [
+        "/mnt/c/dev/tronlight/**"
+      ]
+    },
+    "edit": {
+      "allow": [
+        "/mnt/c/dev/tronlight/**"
+      ]
+    }
+  },
+  "autoApprove": {
+    "bash": true,
+    "read": true,
+    "write": true,
+    "edit": true
+  }
+}

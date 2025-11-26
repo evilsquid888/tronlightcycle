@@ -5,6 +5,39 @@ All notable changes to the Tron Light Cycle game will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2025-11-26
+
+### Added
+- 25 UI integration tests (total: 63 tests)
+  - HTML structure validation
+  - CSS styles verification
+  - Script loading checks
+  - Element existence tests
+  - Renderer source code validation
+- Comprehensive debug logging in renderer
+- PROJECT_STATUS.md - Complete project documentation
+- .claude/config.json - Auto-approve permissions for development
+- Extensive troubleshooting documentation for WSL2/Windows issues
+
+### Changed
+- Updated README with detailed WSL2 troubleshooting
+- Expanded troubleshooting section with debugging steps
+- Added console logging for initialization steps
+- Improved error handling in renderer (null checks)
+
+### Fixed
+- Added error checking for DOM elements before access
+- Improved menu visibility debugging
+- Better logging for troubleshooting UI issues
+
+### Documentation
+- Documented WSL2 + Electron compatibility issues
+- Explained why Electron fails in WSL2 (architecture, module loading)
+- Added 3 recommended solutions with detailed steps
+- Created comprehensive debugging guide for menu issues
+- Added controls troubleshooting section
+- Documented performance considerations
+
 ## [1.0.0] - 2025-11-25
 
 ### Added
