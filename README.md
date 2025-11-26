@@ -84,20 +84,44 @@ You'll need to generate these 7 images and place them in the `assets/images/` di
 
 ## Troubleshooting
 
+### Running on WSL2
+
+**⚠️ Electron GUI apps have known issues running directly in WSL2.** Even with X11 configured, Electron may fail to initialize properly.
+
+**Recommended Solutions:**
+
+1. **Run from Windows** (Easiest):
+   ```cmd
+   # Open Windows PowerShell or CMD in the project folder
+   npm install
+   npm run build
+   npm start
+   ```
+
+2. **Use WSLg** (WSL 2 with GUI support - Windows 11 only):
+   - Make sure you're on Windows 11 with WSLg enabled
+   - Update WSL: `wsl --update`
+   - Restart WSL
+   - Try running again
+
+3. **Build and copy to Windows**:
+   ```bash
+   # In WSL, build the project
+   npm run build
+
+   # Then run from Windows side using the same folder
+   ```
+
 ### XInput Error on WSL2
 
-If you see errors like `ERROR:xinput.cc(2297)` when running on WSL2, this is a harmless warning about X11 input handling. The game will work perfectly fine.
-
-**Solutions:**
-- Use `npm start` - automatically filters these warnings
-- Use `npm run start:verbose` - to see all output including warnings
-- These errors don't affect gameplay or functionality
+If you see errors like `ERROR:xinput.cc(2297)`, this is a harmless X11 warning. However, if the GUI doesn't appear, see "Running on WSL2" above.
 
 ### Game Won't Start
 
 1. Make sure you've built the project: `npm run build`
 2. Check that Node.js and npm are installed
 3. Try reinstalling dependencies: `rm -rf node_modules && npm install`
+4. If on WSL2, try running from Windows PowerShell instead (see above)
 
 ## License
 
