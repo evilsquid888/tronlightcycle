@@ -11,12 +11,24 @@ class GameRenderer {
   private readonly frameTime = 1000 / this.targetFPS;
 
   constructor() {
+    console.log('GameRenderer initializing...');
+
     this.canvas = document.getElementById('canvas') as HTMLCanvasElement;
+    if (!this.canvas) {
+      console.error('Canvas element not found!');
+      throw new Error('Canvas element not found');
+    }
+
     this.ctx = this.canvas.getContext('2d')!;
+    if (!this.ctx) {
+      console.error('Could not get 2D context!');
+      throw new Error('Could not get 2D context');
+    }
 
     // Set canvas size
     this.canvas.width = 1200;
     this.canvas.height = 700;
+    console.log(`Canvas size: ${this.canvas.width}x${this.canvas.height}`);
 
     // Initialize game engine
     this.engine = new GameEngine({
@@ -28,10 +40,13 @@ class GameRenderer {
       currentRound: 1,
       totalRounds: 5
     });
+    console.log('Game engine initialized');
 
     this.setupControls();
     this.setupUI();
+    console.log('About to show menu...');
     this.showMenu();
+    console.log('GameRenderer initialization complete');
   }
 
   private setupControls(): void {
@@ -75,12 +90,24 @@ class GameRenderer {
   }
 
   private showMenu(): void {
-    const menu = document.getElementById('menu')!;
+    const menu = document.getElementById('menu');
+    if (!menu) {
+      console.error('Menu element not found!');
+      return;
+    }
+
+    console.log('Showing menu...');
     menu.style.display = 'block';
+    console.log('Menu display set to:', menu.style.display);
 
     const config = this.engine.getConfig();
-    document.getElementById('round')!.textContent = config.currentRound.toString();
-    document.getElementById('total-rounds')!.textContent = config.totalRounds.toString();
+    const roundEl = document.getElementById('round');
+    const totalRoundsEl = document.getElementById('total-rounds');
+
+    if (roundEl) roundEl.textContent = config.currentRound.toString();
+    if (totalRoundsEl) totalRoundsEl.textContent = config.totalRounds.toString();
+
+    console.log('Menu should now be visible');
   }
 
   private hideMenu(): void {

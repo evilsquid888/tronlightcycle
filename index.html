@@ -129,5 +129,17 @@
   </div>
 
   <script src="dist/renderer.js"></script>
+  <script>
+    // Debug: Check if renderer loaded
+    console.log('HTML loaded, checking renderer...');
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM loaded');
+      const menu = document.getElementById('menu');
+      const canvas = document.getElementById('canvas');
+      console.log('Menu element:', menu);
+      console.log('Canvas element:', canvas);
+      console.log('Menu display:', menu ? menu.style.display : 'not found');
+    });
+  </script>
 </body>
 </html>

@@ -4,8 +4,7 @@
   "description": "Tron Light Cycle Game",
   "main": "dist/main.js",
   "scripts": {
-    "start": "electron . 2>&1 | grep -v 'xinput.cc'",
-    "start:verbose": "electron .",
+    "start": "electron .",
     "dev": "tsc && npm start",
     "build": "tsc",
     "watch": "tsc --watch",
