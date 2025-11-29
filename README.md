@@ -4,22 +4,30 @@ A single-player Tron light cycle game built with Electron and TypeScript. Race a
 
 ## Project Status
 
-✅ **Complete and Tested**
-- Game code: Fully implemented
+✅ **Complete and Tested** (v1.1.0)
+- Game code: Fully implemented with image support
 - Tests: 63/63 passing
-- Images: All 7 assets included (high resolution)
-- Build: Successful
+- Images: All 7 assets included and fully integrated
+- Image loading: Automatic with fallback to shapes
+- Build: Successful with esbuild bundler
 - Git: Repository initialized with full commit history
+- Compatible: Windows (native), WSL2 (with workarounds)
 
-⚠️ **Known Issue: WSL2 + Electron**
-- Electron GUI apps have compatibility issues with WSL2
-- **Solution:** Run from Windows PowerShell/CMD (see Troubleshooting below)
+🎨 **New in v1.1.0**
+- Visual enhancement: Custom Tron cycle images now display in-game
+- Background image rendering for immersive arena experience
+- Configurable rendering: Toggle between images and simple shapes
+- Fixed critical ES module loading bug
 
 ## Features
 
 - Single player vs AI opponents
 - Progressive difficulty with 5 rounds (3-5 AI cycles)
 - Classic Tron light cycle gameplay mechanics
+- **Custom image rendering** with automatic loading and fallback
+- **Configurable visuals** - Toggle between images and geometric shapes
+- High-resolution Tron cycle sprites with color variants
+- Immersive arena background image
 - Comprehensive collision detection (walls, trails, self-collision prevention)
 - Smart AI with 3 strategies (Defensive, Balanced, Aggressive)
 - Retro cyberpunk aesthetic with neon glow effects
@@ -55,32 +63,30 @@ npm test
 npm test:watch
 ```
 
-## Image Assets Required
+## Image Assets
 
-You'll need to generate these 7 images and place them in the `assets/images/` directory:
+✅ **All 7 images are included** in the `assets/images/` directory and automatically loaded by the game!
 
-### 1. player-cycle.png
-"Futuristic Tron light cycle motorcycle in electric blue color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
+The game includes high-resolution images for:
+1. **player-cycle.png** - Electric blue player cycle
+2. **ai-cycle-red.png** - Red/orange AI opponent
+3. **ai-cycle-yellow.png** - Yellow AI opponent
+4. **ai-cycle-green.png** - Green AI opponent
+5. **ai-cycle-purple.png** - Purple/magenta AI opponent
+6. **arena-bg.png** - Dark Tron grid arena background (1920x1080)
+7. **explosion.png** - Neon explosion effects (512x512)
 
-### 2. ai-cycle-red.png
-"Futuristic Tron light cycle motorcycle in bright red/orange color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
+### Configuration
 
-### 3. ai-cycle-yellow.png
-"Futuristic Tron light cycle motorcycle in electric yellow color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
+To toggle between images and simple shapes, edit `src/renderer.ts`:
 
-### 4. ai-cycle-green.png
-"Futuristic Tron light cycle motorcycle in neon green color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
+```typescript
+private readonly USE_IMAGES = true; // Set to false to use simple shapes
+```
 
-### 5. ai-cycle-purple.png
-"Futuristic Tron light cycle motorcycle in purple/magenta color, side view, glowing neon trails, sleek angular design, cyberpunk aesthetic, transparent background, game sprite, 128x128 pixels"
+Then rebuild: `npm run build`
 
-### 6. arena-bg.png
-"Dark Tron grid arena background, black floor with glowing blue grid lines, futuristic cyberpunk aesthetic, digital world, top-down view, seamless texture, 1920x1080"
-
-### 7. explosion.png
-"Neon explosion effect sprite sheet, electric particles, glowing fragments, Tron style, cyberpunk aesthetic, transparent background, 512x512 pixels"
-
-**Note:** The game is fully playable without these images - it uses colored geometric shapes as placeholders. The images are optional visual enhancements!
+**Note:** The game automatically falls back to colored geometric shapes if images fail to load!
 
 ## How to Play
 

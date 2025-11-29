@@ -5,6 +5,41 @@ All notable changes to the Tron Light Cycle game will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-11-29
+
+### Added
+- **Image loading support** - Game now displays custom Tron cycle images
+  - Configurable `USE_IMAGES` flag to toggle between images and simple shapes
+  - Automatic loading of all 7 game assets from `assets/images/` directory
+  - Smart color-based mapping of AI cycles to appropriate images
+  - Background image rendering (arena-bg.png)
+  - Player cycle image (player-cycle.png in electric blue)
+  - AI cycle images (red, yellow, green, purple variants)
+- **Image loading progress tracking** with console logging
+- Fallback to geometric shapes when images unavailable or disabled
+
+### Changed
+- Canvas rendering now uses images when `USE_IMAGES = true`
+- Cycle size increased to 20px when using images (was 8px for shapes)
+- Background switches between arena image and grid overlay based on image availability
+- Grid overlay hidden when using background image for cleaner visuals
+
+### Fixed
+- **Critical: ES module loading error** - Fixed `exports is not defined` error
+  - Added esbuild bundler to create browser-compatible JavaScript
+  - Created separate TypeScript configs for main process (CommonJS) and renderer (ES2020)
+  - Updated build process to use bundler for renderer code
+  - Changed HTML script tag from module to regular script (bundled code)
+- Resolved file path resolution issues in browser environment
+
+### Technical
+- Added esbuild v0.27.0 as dev dependency
+- Created `build.js` for custom esbuild configuration
+- Split TypeScript compilation:
+  - `tsconfig.main.json` - Electron main process (CommonJS)
+  - `tsconfig.renderer.json` - Browser renderer (ES2020 modules, bundled)
+- Updated npm scripts to use new build process
+
 ## [1.0.1] - 2025-11-26
 
 ### Added
