@@ -10,6 +10,19 @@ class GameRenderer {
   private readonly targetFPS = 60;
   private readonly frameTime = 1000 / this.targetFPS;
 
+  // Image assets configuration
+  private readonly USE_IMAGES = true; // Set to false to use simple shapes
+  private images: {
+    playerCycle?: HTMLImageElement;
+    aiCycleRed?: HTMLImageElement;
+    aiCycleYellow?: HTMLImageElement;
+    aiCycleGreen?: HTMLImageElement;
+    aiCyclePurple?: HTMLImageElement;
+    arenaBg?: HTMLImageElement;
+    explosion?: HTMLImageElement;
+  } = {};
+  private imagesLoaded = false;
+
   constructor() {
     console.log('GameRenderer initializing...');
 
@@ -44,6 +57,12 @@ class GameRenderer {
 
     this.setupControls();
     this.setupUI();
+
+    // Load images if enabled
+    if (this.USE_IMAGES) {
+      this.loadImages();
+    }
+
     console.log('About to show menu...');
     this.showMenu();
     console.log('GameRenderer initialization complete');
@@ -86,6 +105,43 @@ class GameRenderer {
     const startBtn = document.getElementById('start-btn')!;
     startBtn.addEventListener('click', () => {
       this.startGame();
+    });
+  }
+
+  private loadImages(): void {
+    console.log('Loading images...');
+    const imagesToLoad = [
+      { key: 'playerCycle', path: 'assets/images/player-cycle.png' },
+      { key: 'aiCycleRed', path: 'assets/images/ai-cycle-red.png' },
+      { key: 'aiCycleYellow', path: 'assets/images/ai-cycle-yellow.png' },
+      { key: 'aiCycleGreen', path: 'assets/images/ai-cycle-green.png' },
+      { key: 'aiCyclePurple', path: 'assets/images/ai-cycle-purple.png' },
+      { key: 'arenaBg', path: 'assets/images/arena-bg.png' },
+      { key: 'explosion', path: 'assets/images/explosion.png' },
+    ];
+
+    let loadedCount = 0;
+    const totalImages = imagesToLoad.length;
+
+    imagesToLoad.forEach(({ key, path }) => {
+      const img = new Image();
+      img.onload = () => {
+        loadedCount++;
+        console.log(`Loaded ${key} (${loadedCount}/${totalImages})`);
+        if (loadedCount === totalImages) {
+          this.imagesLoaded = true;
+          console.log('All images loaded successfully!');
+        }
+      };
+      img.onerror = () => {
+        console.warn(`Failed to load image: ${path}`);
+        loadedCount++;
+        if (loadedCount === totalImages) {
+          console.log('Image loading complete (some failed)');
+        }
+      };
+      img.src = path;
+      this.images[key as keyof typeof this.images] = img;
     });
   }
 
@@ -153,12 +209,16 @@ class GameRenderer {
   }
 
   private render(): void {
-    // Clear canvas
-    this.ctx.fillStyle = '#000';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-    // Draw grid
-    this.drawGrid();
+    // Clear canvas and draw background
+    if (this.USE_IMAGES && this.imagesLoaded && this.images.arenaBg) {
+      // Draw tiled background
+      this.ctx.drawImage(this.images.arenaBg, 0, 0, this.canvas.width, this.canvas.height);
+    } else {
+      this.ctx.fillStyle = '#000';
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      // Draw grid when not using background image
+      this.drawGrid();
+    }
 
     // Draw cycles and trails
     const cycles = this.engine.getCycles();
@@ -194,33 +254,71 @@ class GameRenderer {
   }
 
   private drawCycle(cycle: Cycle): void {
-    const size = 8;
+    const size = 20; // Larger size for images
 
-    // Cycle body
-    this.ctx.fillStyle = cycle.color;
-    this.ctx.shadowBlur = 15;
-    this.ctx.shadowColor = cycle.color;
+    // Determine which image to use based on cycle color
+    let cycleImage: HTMLImageElement | undefined;
+    if (this.USE_IMAGES && this.imagesLoaded) {
+      if (cycle.isPlayer) {
+        cycleImage = this.images.playerCycle;
+      } else {
+        // Map AI cycle colors to images
+        const colorMap: { [key: string]: keyof typeof this.images } = {
+          '#ff0000': 'aiCycleRed',
+          '#ff6600': 'aiCycleRed',
+          '#ffff00': 'aiCycleYellow',
+          '#ffcc00': 'aiCycleYellow',
+          '#00ff00': 'aiCycleGreen',
+          '#00ff66': 'aiCycleGreen',
+          '#ff00ff': 'aiCyclePurple',
+          '#ff66ff': 'aiCyclePurple',
+        };
+        const imageKey = colorMap[cycle.color];
+        if (imageKey) {
+          cycleImage = this.images[imageKey];
+        }
+      }
+    }
 
-    this.ctx.fillRect(
-      cycle.position.x - size / 2,
-      cycle.position.y - size / 2,
-      size,
-      size
-    );
-
-    // Reset shadow
-    this.ctx.shadowBlur = 0;
-
-    // Player indicator
-    if (cycle.isPlayer) {
-      this.ctx.strokeStyle = '#ffffff';
-      this.ctx.lineWidth = 2;
-      this.ctx.strokeRect(
-        cycle.position.x - size / 2 - 2,
-        cycle.position.y - size / 2 - 2,
-        size + 4,
-        size + 4
+    if (cycleImage) {
+      // Draw cycle image with glow effect
+      this.ctx.shadowBlur = 15;
+      this.ctx.shadowColor = cycle.color;
+      this.ctx.drawImage(
+        cycleImage,
+        cycle.position.x - size / 2,
+        cycle.position.y - size / 2,
+        size,
+        size
       );
+      this.ctx.shadowBlur = 0;
+    } else {
+      // Fallback to simple shape
+      const shapeSize = 8;
+      this.ctx.fillStyle = cycle.color;
+      this.ctx.shadowBlur = 15;
+      this.ctx.shadowColor = cycle.color;
+
+      this.ctx.fillRect(
+        cycle.position.x - shapeSize / 2,
+        cycle.position.y - shapeSize / 2,
+        shapeSize,
+        shapeSize
+      );
+
+      this.ctx.shadowBlur = 0;
+
+      // Player indicator
+      if (cycle.isPlayer) {
+        this.ctx.strokeStyle = '#ffffff';
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeRect(
+          cycle.position.x - shapeSize / 2 - 2,
+          cycle.position.y - shapeSize / 2 - 2,
+          shapeSize + 4,
+          shapeSize + 4
+        );
+      }
     }
   }
 

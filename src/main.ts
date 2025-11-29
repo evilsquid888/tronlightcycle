@@ -15,10 +15,8 @@ function createWindow() {
 
   mainWindow.loadFile(path.join(__dirname, '../index.html'));
 
-  // Open DevTools in development
-  if (process.env.NODE_ENV === 'development') {
-    mainWindow.webContents.openDevTools();
-  }
+  // Open DevTools for debugging
+  mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {
